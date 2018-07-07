@@ -1,0 +1,22 @@
+<div class="flex-center text-center">
+  <form class="form-signin" name="form" (ngSubmit)="f.form.valid && login()" #f="ngForm" novalidate>
+    <img class="mb-5" src="/assets/images/logos/ekitchen.png" alt="" width="80" height="100">
+    <div class="form-label-group" [ngClass]="{ 'has-error': f.submitted && !email.valid }">
+      <input type="email" id="inputEmail" name="email" class="form-control" placeholder="Email address" [(ngModel)]="model.email" #email="ngModel" required autofocus>
+      <label for="inputEmail">Email address</label>
+    </div>
+
+    <div class="form-label-group" [ngClass]="{ 'has-error': f.submitted && !password.valid }">
+      <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" [(ngModel)]="model.password" #password="ngModel" required>
+      <label for="inputPassword">Password</label>
+    </div>
+
+    <button class="btn btn-lg btn-primary btn-block" [disabled]="loading" type="submit">Sign in</button>
+
+    <div class="form-group">
+      <div *ngIf="error" class="alert alert-danger">{{error}}</div>
+    </div>
+
+    <p class="mt-5 mb-3 text-muted text-center">&copy; 2017-2018</p>
+  </form>
+</div>

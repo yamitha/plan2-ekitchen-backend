@@ -1,0 +1,134 @@
+<main class="page-content">
+  <app-navigation></app-navigation>
+
+  <div class="inner-page-container">
+    <div class="page-inner">
+      <div class="page-body">
+        <div class="common-dash">
+          <div class="dash-pad">
+            <div class="tab-title">
+              <h2>
+                Add a Coupon
+              </h2>
+            </div>
+
+            <div class="h-form">
+              <form id="couponForm" name="couponForm" (ngSubmit)="couponForm.form.valid && addCoupon(couponForm)" #couponForm="ngForm" novalidate>
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="">Select a event this item belongs to</label>
+                        <ng-selectize [config]="config" [options]="eventsList" [(ngModel)]="selectize.eventId" name="eventId" #eventId="ngModel" (ngModelChange)="onValueChangeEvent($event)" noOptionsPlaceholder="No Events Available" hasOptionsPlaceholder="Choose an option from the list"></ng-selectize>
+                        <!-- <div class="set" *ngIf="newItem.eventId">Event is set to <span>{{newItem.eventName}}</span></div> -->
+                    </div>
+                  </div>
+                  
+                  <div class="col-md-12">
+                    <div class="form-group" [ngClass]="{ 'has-danger': couponForm.submitted && !couponName.valid }">
+                      <label for="">Coupon Name</label>
+                      <input type="text" class="form-control" placeholder="Title" name="couponName" [(ngModel)]="newCoupon.couponName" #couponName="ngModel" [ngClass]="{ 'is-invalid': couponForm.submitted && !couponName.valid }" required>                       
+                      <div *ngIf="couponForm.submitted && !couponName.valid" class="invalid-feedback">Title is required</div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label for="">Art Work Link</label>
+                      <input type="text" class="form-control" placeholder="http://image.jpg" name="artWorkLink" [(ngModel)]="newCoupon.artWorkLink" #artWorkLink="ngModel">
+                    </div>
+                  </div>
+
+                  <div class="col-md-12">
+                    <div class="form-group whatsapp-number" [ngClass]="{ 'has-danger': couponForm.submitted && !whatsappNumber.valid }">
+                      <label for="">Whatsapp Number</label>
+                      <span>+94</span>
+                      <input type="text" class="form-control" placeholder="e.g. 771234567" name="whatsappNumber" [(ngModel)]="newCoupon.whatsappNumber"
+                        #whatsappNumber="ngModel" [ngClass]="{ 'is-invalid': couponForm.submitted && !whatsappNumber.valid}"
+                        required>
+                      <div *ngIf="couponForm.submitted && !whatsappNumber.valid" class="invalid-feedback">Whatsapp Number is required</div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label for="">Coupon Value</label>
+                      <input type="number" class="form-control" placeholder="10000" name="value" [(ngModel)]="newCoupon.value" #value="ngModel">
+                    </div>
+                  </div>
+
+                  <div class="col-md-12">
+                    <div class="form-group" [ngClass]="{ 'has-danger': couponForm.submitted && !description.valid }">
+                      <label for="">Description</label>
+                      <quill-editor name="description" [(ngModel)]="newCoupon.description" [options]="editorOptions"
+                        ></quill-editor>
+                    </div>
+                  </div>
+
+                  <div class="col-md-12">
+                    <div class="form-group button-container">
+                      <button type="submit" class="btn btn-success">Add Coupon</button>
+                    </div>
+                  </div>
+
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <div class="common-body">
+          <div class="common-search-wrapper">
+            <!-- <div class="search-input">
+              <input type="text" name="" value="" placeholder="Search" onclick="this.placeholder = ''" onblur="this.placeholder = 'Search'"
+                class="form-control" [(ngModel)]="searchTerm">
+              <span class="icon-search"></span>
+            </div> -->
+          </div>
+          <div class="common-content-body">
+            <div class="padding">
+              <table class="common-table">
+                <tr class="table-header">
+                  <th class="" width="200">Coupon Name</th>
+                  <th class="" width="200">Art Work Link</th>
+                  <th class="" width="120">Event</th>
+                  <th class="" width="200">Url</th>
+                  <th class="" width="110">Whatsapp No.</th>
+                  <th class="" width="160">Coupon Value</th>
+                  <th class="" width="120">Description</th>
+                  <th class="" width="130">Added On</th>
+                  <th class="" width="150">Added By</th>
+                  <!-- <th class="tp"></th> -->
+                  <th class="tp" width="100"></th>
+                </tr>
+                <tr class="common-table-tr" *ngFor="let coupon of couponsList">
+                  <td class="normal-td">{{ coupon.couponName }}</td>
+                  <td class="normal-td">{{ coupon.artWorkLink }}</td>
+                  <td class="normal-td">{{ coupon.eventName }}</td>
+                  <td class="normal-td">ekitchen.lk/{{ coupon.url }}</td>
+                  <td class="normal-td">{{ coupon.whatsappNumber }}</td>
+                  <td class="normal-td">{{ coupon.value }}</td>
+                  <td class="normal-td">{{ coupon.description }}</td>
+                  <td class="normal-td">{{ coupon.addedOn | date : 'short'}}</td>
+                  <td class="normal-td">{{ coupon.addedBy }}</td>
+
+                  <!-- <td class="button-td">
+                                      <button class="button-item">
+                                          <span class="icon-pencil">edit</span>
+                                      </button>
+                                  </td> -->
+                  <td class="button-td">
+                    <button class="button-item" (click)="deleteCoupon(coupon);">
+                      <span class="icon-trash">x</span>
+                    </button>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<ng2-toasty></ng2-toasty>

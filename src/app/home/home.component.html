@@ -1,0 +1,246 @@
+<app-navigation></app-navigation>
+
+<div class="inner-page-container">
+    <div class="page-inner">
+        <div class="stats-wrapper">            
+            <div class="stats-holder">
+                <div class="stat">
+                    <div class="count">
+                        {{ todaysOrders }}
+                    </div>
+                    <div class="text">
+                        Todays Orders
+                    </div>
+                </div>
+
+                <div class="stat">
+                    <div class="count">
+                        {{ oldOrders }}
+                    </div>
+                    <div class="text">
+                        Previous Orders
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="search-wrapper">
+            <div class="buttons-container">
+                <button type="button" name="button" class="btn" [ngClass]="{'active' : panel == 1}" (click)="panel = 1">Today's Orders</button>
+                <button type="button" name="button" class="btn" [ngClass]="{'active' : panel == 2}" (click)="panel = 2">Previous Orders</button>
+            </div>
+            <div class="search-input">
+                <input type="text" name="search" class="form-control" placeholder="Search" [(ngModel)]="searchTerm">
+                <span class="icon-search"></span>
+            </div>
+        </div>
+
+        <div class="content-body">
+            <div class="home-table" [ngSwitch]="panel">
+                <div class="padding">
+                    <!-- Live -->
+                    <table class="tg" *ngSwitchCase="1">
+                        <thead>
+                            <tr class="table-header">
+                                <th class="tg-yw4l transparent" width="40"></th>
+                                <!-- <th class="tg-yw4l transparent" width="50"></th> -->
+                                <!-- <th class="tg-yw4l" width="80">
+                                    Order Id
+                                </th> -->
+                                <th class="tg-yw4l" width="150">
+                                    Order Date/Time
+                                </th>
+                                <th class="tg-yw4l" width="200">
+                                    Customer Name
+                                </th>
+                                <th class="tg-yw4l" width="110">
+                                    Phone Number
+                                </th>
+                                <th class="tg-yw4l" width="180">
+                                    Kitchen Name
+                                </th>
+                                <th class="tg-yw4l" width="180">
+                                    Event
+                                </th>
+                                <th class="tg-yw4l" width="110">
+                                    Kitchen Contact
+                                </th>
+                                <th class="tg-yw4l" width="110">
+                                    Event Contact
+                                </th>    
+                                <th class="tg-yw4l" width="300">
+                                    Delivery Location or Company
+                                </th>
+                                <th class="tg-yw4l" width="100">
+                                    Order Total
+                                </th>
+                                <th class="tg-yw4l" width="120">
+                                    Payment Method
+                                </th>
+                                <!-- <th class="tg-yw4l" width="80">
+                                    Paid
+                                </th> -->
+                                <!-- <th class="tg-yw4l" width="100">
+                                    Completed
+                                </th> -->
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="table-body" [attr.data-index]="i" *ngFor="let order of orders | filterOrder: searchTerm">
+                                <ng-container *ngIf="order.orderDateTime.setHours(0, 0, 0, 0) == todaysDate.setHours(0, 0, 0, 0)">                                    
+                                    <td class="tg-yw4l w-b">
+                                        <button class="">
+                                            x
+                                        </button>
+                                    </td>
+                                    <!-- <td class="tg-yw4l">
+                                        {{ order.orderId }}
+                                    </td> -->
+                                    <td class="tg-yw4l">
+                                        {{ order.orderDateTime | date: 'short'}}
+                                    </td>
+                                    <td class="tg-yw4l">
+                                        {{ order.customerName }}
+                                    </td>
+                                    <td class="tg-yw4l">
+                                        {{ order.customerContactNumber }}
+                                    </td>
+                                    <td class="tg-yw4l">
+                                        {{ order.kitchenName }}
+                                    </td>
+                                    <td class="tg-yw4l">
+                                        {{ order.eventName }}
+                                    </td>
+                                    <td class="tg-yw4l">
+                                        {{ order.kitchenWhatsappNumber }}
+                                    </td>
+                                    <td class="tg-yw4l">
+                                            {{ order.eventWhatsappNumber }}
+                                    </td>
+                                    <td class="tg-yw4l">
+                                        {{ order.deliveryAddress }}
+                                    </td>
+                                    <td class="tg-yw4l">
+                                        {{ order.orderTotal | number: '1.2-2' }}
+                                    </td>
+                                    <td class="tg-yw4l">
+                                        {{ order.paymentMethod }}
+                                    </td>
+                                    <!-- <td class="tg-yw4l">
+                                        <span *ngIf="order.paid === true">Yes</span>
+                                        <span *ngIf="order.paid === false">No</span>
+                                    </td> -->
+                                    <!-- <td class="tg-yw4l">
+                                        <div class="checkbox">
+                                            <input type="checkbox" name="" id="">
+                                        </div>
+                                    </td> -->
+                                </ng-container>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="tg" *ngSwitchCase="2">
+                        <thead>
+                            <tr class="table-header">
+                                <th class="tg-yw4l transparent" width="40"></th>
+                                <!-- <th class="tg-yw4l transparent" width="50"></th> -->
+                                <!-- <th class="tg-yw4l" width="80">
+                                    Order Id
+                                </th> -->
+                                <th class="tg-yw4l" width="150">
+                                    Order Date/Time
+                                </th>
+                                <th class="tg-yw4l" width="200">
+                                    Customer Name
+                                </th>
+                                <th class="tg-yw4l" width="110">
+                                    Phone Number
+                                </th>
+                                <th class="tg-yw4l" width="180">
+                                    Kitchen Name
+                                </th>
+                                <th class="tg-yw4l" width="180">
+                                        Event Name
+                                </th>
+                                <th class="tg-yw4l" width="110">
+                                    Kitchen Contact
+                                </th>
+                                <th class="tg-yw4l" width="110">
+                                    Event Contact
+                                </th>
+                                <th class="tg-yw4l" width="300">
+                                    Delivery Location or Company
+                                </th>
+                                <th class="tg-yw4l" width="100">
+                                    Order Total
+                                </th>
+                                <th class="tg-yw4l" width="120">
+                                    Payment Method
+                                </th>
+                                <!-- <th class="tg-yw4l" width="80">
+                                    Paid
+                                </th> -->
+                                <!-- <th class="tg-yw4l" width="100">
+                                    Completed
+                                </th> -->
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="table-body" [attr.data-index]="i" *ngFor="let order of orders | filterOrder: searchTerm">
+                                <ng-container *ngIf="order.orderDateTime.setHours(0, 0, 0, 0) < todaysDate.setHours(0, 0, 0, 0)">                                    
+                                    <td class="tg-yw4l w-b">
+                                        <button class="">
+                                            x
+                                        </button>
+                                    </td>
+                                    <!-- <td class="tg-yw4l">
+                                        {{ order.orderId }}
+                                    </td> -->
+                                    <td class="tg-yw4l">
+                                        {{ order.orderDateTime | date: 'short'}}
+                                    </td>
+                                    <td class="tg-yw4l">
+                                        {{ order.customerName }}
+                                    </td>
+                                    <td class="tg-yw4l">
+                                        {{ order.customerContactNumber }}
+                                    </td>
+                                    <td class="tg-yw4l">
+                                        {{ order.kitchenName }}
+                                    </td>
+                                    <td class="tg-yw4l">
+                                            {{ order.eventName }}
+                                    </td>
+                                    <td class="tg-yw4l">
+                                        {{ order.kitchenWhatsappNumber }}
+                                    </td>
+                                    <td class="tg-yw4l">
+                                            {{ order.eventWhatsappNumber }}
+                                    </td>
+                                    <td class="tg-yw4l">
+                                        {{ order.deliveryAddress }}
+                                    </td>
+                                    <td class="tg-yw4l">
+                                        {{ order.orderTotal | number: '1.2-2' }}
+                                    </td>
+                                    <td class="tg-yw4l">
+                                        {{ order.paymentMethod }}
+                                    </td>
+                                    <!-- <td class="tg-yw4l">
+                                        <span *ngIf="order.paid === true">Yes</span>
+                                        <span *ngIf="order.paid === false">No</span>
+                                    </td> -->
+                                    <!-- <td class="tg-yw4l">
+                                        <div class="checkbox">
+                                            <input type="checkbox" name="" id="">
+                                        </div>
+                                    </td> -->
+                                </ng-container>
+                            </tr>
+                        </tbody>
+                    </table>						
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>

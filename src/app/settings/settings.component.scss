@@ -1,0 +1,35 @@
+div.add-user{
+    margin-top: 50px;
+
+    div.page-title{
+        margin-bottom: 20px;
+    }
+
+    div.button-container{
+        margin-top: 10px;
+    }
+    
+    .alert.alert-danger{
+        margin-top: 10px;
+        border-radius: 4px;
+    }
+
+    ul.user-list{
+        li{
+            font-size: 14px;
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+    }
+}
+
+div.form-group {
+    label, input{
+        font-size: 12px;
+    }
+}
+
+.button-container button{
+    font-size: 12px;
+}

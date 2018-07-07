@@ -1,0 +1,10 @@
+@import '../../scss/_variables.scss';
+
+.navbar{
+    height: $top-nav-height;
+}
+
+.nav-link.active{
+    color: #fff;
+}
+

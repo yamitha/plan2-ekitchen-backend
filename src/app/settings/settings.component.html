@@ -1,0 +1,121 @@
+<app-navigation></app-navigation>
+
+<div class="inner-page-container">
+    <div class="page-inner">
+        <div class="add-user">
+            <div class="container">
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-12"> 
+                                <div class="page-title">
+                                    <h4>
+                                        Add Administrators to Ekitchen
+                                    </h4>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <form id="userForm" name="userForm" (ngSubmit)="userForm.form.valid && addUser(userForm)" #userForm="ngForm" novalidate>
+                                    <div class="form-group" [ngClass]="{ 'has-danger': userForm.submitted && !fullName.valid }">
+                                        <label>Full Name</label>
+                                        <input type="text" name="fullName" [(ngModel)]="newUser.fullName" class="form-control" placeholder="John Doe" #fullName="ngModel" [ngClass]="{ 'is-invalid': userForm.submitted && !fullName.valid }" required>
+                                        <div *ngIf="userForm.submitted && !fullName.valid" class="invalid-feedback">Full Name is required</div>
+                                    </div>
+
+                                    <div class="form-group" [ngClass]="{ 'has-danger': userForm.submitted && !email.valid }">
+                                        <label>Email</label>
+                                        <input type="email" class="form-control" placeholder="example@email.com" name="email"  [(ngModel)]="newUser.email" #email="ngModel" [ngClass]="{ 'is-invalid': userForm.submitted && !email.valid }" required>
+                                        <div *ngIf="userForm.submitted && !email.valid" class="invalid-feedback">Email is required</div>
+                                    </div>
+
+                                    <div class="form-group" [ngClass]="{ 'has-danger': userForm.submitted && !password.valid }">
+                                        <label class="label">Password</label>
+                                        <input type="password" class="form-control" placeholder="••••" name="password" [(ngModel)]="newUser.password" #password="ngModel" [ngClass]="{ 'is-invalid': userForm.submitted && !password.valid }" required>
+                                        <div *ngIf="userForm.submitted && !password.valid" class="invalid-feedback">Password is required</div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="muted">
+                                            <p>You will be logged out momentarily, please sign-in again.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="button-container">
+                                        <button type="submit" class="btn btn-success">Add User</button>
+                                    </div>
+
+                                    <div class="alert alert-danger" *ngIf="errorMessage">
+                                        {{ errorMessage }}
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-12"> 
+                                <div class="page-title">
+                                    <h4>
+                                        All Adminstrators
+                                    </h4>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <ul class="user-list">
+                                    <li *ngFor="let user of usersList">
+                                        {{ user.fullName }} <br>
+                                        {{ user.email }}
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row" style="margin-top: 40px; margin-bottom: 40px;">
+                    <div class="col-md-12">
+                        <hr>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="page-title">
+                            <h4>Online Ordering System</h4>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <label class="switch">
+                            <input type="checkbox" [(ngModel)]="ekitchen.globalOrdering" (ngModelChange)="configInput();">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="">Reason for ordering being off?</label>
+                            <input type="text" class="form-control" [disabled]="ekitchen.globalOrdering" placeholder="e.g. Due to weather conditions we will not be operating today" [(ngModel)]="ekitchen.globalOrderingReason">
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="button-container">
+                            <button class="btn btn-success" (click)="submitOrdering();">Submit Change</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng2-toasty></ng2-toasty>

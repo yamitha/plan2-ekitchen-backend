@@ -1,0 +1,152 @@
+<main class="page-content">
+  <app-navigation></app-navigation>
+
+  <div class="inner-page-container">
+    <div class="page-inner">
+      <div class="page-body">
+        <div class="common-dash">
+          <div class="dash-pad">
+            <div class="tab-title">
+              <h2>
+                Add a kitchen
+              </h2>
+            </div>
+
+            <div class="h-form">
+              <form id="kitchenForm" name="kitchenForm" (ngSubmit)="kitchenForm.form.valid && addUser(kitchenForm)" #kitchenForm="ngForm"
+                novalidate>
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group" [ngClass]="{ 'has-danger': kitchenForm.submitted && !kitchenName.valid }">
+                      <label for="">Kitchen Name</label>
+                      <input type="text" class="form-control" placeholder="e.g. John's Kitchen" name="kitchenName" [(ngModel)]="newKitchen.kitchenName"
+                        #kitchenName="ngModel" [ngClass]="{ 'is-invalid': kitchenForm.submitted && !kitchenName.valid }" required>
+                      <div *ngIf="kitchenForm.submitted && !kitchenName.valid" class="invalid-feedback">Kitchen Name is required</div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-12">
+                    <div class="form-group whatsapp-number" [ngClass]="{ 'has-danger': kitchenForm.submitted && !whatsappNumber.valid }">
+                      <label for="">Whatsapp Number</label>
+                      <span>+94</span>
+                      <input type="text" class="form-control" placeholder="e.g. 771234567" name="whatsappNumber" [(ngModel)]="newKitchen.whatsappNumber"
+                        #whatsappNumber="ngModel" [ngClass]="{ 'is-invalid': kitchenForm.submitted && !whatsappNumber.valid}"
+                        required>
+                      <div *ngIf="kitchenForm.submitted && !whatsappNumber.valid" class="invalid-feedback">Whatsapp Number is required</div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-12">
+                    <div class="form-group" [ngClass]="{ 'has-danger': kitchenForm.submitted && !email.valid }">
+                      <label for="">Email</label>
+                      <input type="email" class="form-control" placeholder="example@email.com" name="email" [(ngModel)]="newKitchen.email" #email="ngModel"
+                        [ngClass]="{ 'is-invalid': kitchenForm.submitted && !email.valid}" required>
+                      <div *ngIf="kitchenForm.submitted && !email.valid" class="invalid-feedback">Email is required</div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-12">
+                    <div class="form-group" [ngClass]="{ 'has-danger': kitchenForm.submitted && !password.valid }">
+                      <label for="">Password</label>
+                      <input type="password" name="" id="" class="form-control" placeholder="••••" name="password" [(ngModel)]="newKitchen.password"
+                        #password="ngModel" [ngClass]="{ 'is-invalid' : kitchenForm.submitted && !password.valid}" required>
+                      <div *ngIf="kitchenForm.submitted && !password.valid" class="invalid-feedback">Password is required</div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label for="">Logo Link</label>
+                      <input type="text" class="form-control" placeholder="http://image.png" name="logoUrl" [(ngModel)]="newKitchen.logoUrl" #logoUrl="ngModel">
+                    </div>
+                  </div>
+
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label for="">Transaction %</label>
+                      <input type="number" class="form-control" placeholder="13" name="transactionPercentage" [(ngModel)]="newKitchen.transactionPercentage"
+                        #transactionPercentage="ngModel">
+                    </div>
+                  </div>
+
+                  <div class="col-md-12">
+                    <div class="muted">
+                      <p>You will be logged out momentarily, please sign-in again.</p>
+                    </div>
+                  </div>
+
+
+                  <div class="col-md-12">
+                    <div class="form-group button-container">
+                      <button type="submit" class="btn btn-success">Add Kitchen</button>
+                    </div>
+                  </div>
+
+                  <div class="col-md-12" *ngIf="errorMessage">
+                    <div class="alert alert-danger">
+                      {{ errorMessage }}
+                    </div>
+                  </div>
+
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <div class="common-body">
+          <div class="common-search-wrapper">
+            <div class="search-input">
+              <input type="text" name="" value="" placeholder="Search" onclick="this.placeholder = ''" onblur="this.placeholder = 'Search'"
+                class="form-control" [(ngModel)]="searchTerm">
+              <span class="icon-search"></span>
+            </div>
+          </div>
+          <div class="common-content-body">
+            <div class="padding">
+              <table class="common-table">
+                <tr class="table-header">
+                  <th class="" width="200">Name</th>
+                  <th class="" width="200">URL</th>
+                  <th class="" width="110">Whatsapp No.</th>
+                  <th class="" width="160">Email</th>
+                  <th class="" width="120">Logo Link</th>
+                  <th class="" width="80">Open</th>
+                  <th class="" width="120">Transaction %</th>
+                  <th class="" width="130">Added On</th>
+                  <th class="" width="150">Added By</th>
+                  <!-- <th class="tp"></th> -->
+                  <th class="tp" width="100"></th>
+                </tr>
+                <tr class="common-table-tr" *ngFor="let kitchen of kitchensList | filterKitchen : searchTerm">
+                  <td class="normal-td">{{ kitchen.kitchenName }}</td>
+                  <td class="normal-td">ekitchen.lk/{{ kitchen.url }}</td>
+                  <td class="normal-td">{{ kitchen.whatsappNumber }}</td>
+                  <td class="normal-td">{{ kitchen.email }}</td>
+                  <td class="normal-td">{{ kitchen.logoUrl }}</td>
+                  <td class="normal-td">{{ kitchen.open }}</td>
+                  <td class="normal-td">{{ kitchen.transactionPercentage }}</td>
+                  <td class="normal-td">{{ kitchen.addedOn | date : 'short'}}</td>
+                  <td class="normal-td">{{ kitchen.addedBy }}</td>
+
+                  <!-- <td class="button-td">
+                                        <button class="button-item">
+                                            <span class="icon-pencil">edit</span>
+                                        </button>
+                                    </td> -->
+                  <td class="button-td">
+                    <button class="button-item" (click)="deleteKitchen(kitchen);">
+                      <span class="icon-trash">x</span>
+                    </button>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<ng2-toasty></ng2-toasty>

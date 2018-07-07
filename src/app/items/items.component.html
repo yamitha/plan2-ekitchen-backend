@@ -1,0 +1,116 @@
+<main class="page-content">
+    <app-navigation></app-navigation>
+    
+    <div class="inner-page-container">
+        <div class="page-inner">
+            <div class="page-body">
+                <div class="common-dash">
+                    <div class="dash-pad">
+                        <div class="tab-title">
+                            <h2>
+                                Add items to kitchen
+                            </h2>
+                        </div>
+
+                        <div class="h-form">
+                            <form id="itemForm" name="itemForm" (ngSubmit)="itemForm.form.valid && addItem(itemForm)" #itemForm="ngForm" novalidate>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="">Select a kitchen this item belongs to</label>
+                                            <ng-selectize [config]="config" [options]="kitchensList" [(ngModel)]="selectize.kitchenId" name="kitchenId" #kitchenId="ngModel" (ngModelChange)="onValueChangeKitchen($event)" noOptionsPlaceholder="No Kitchens Available" hasOptionsPlaceholder="Choose an option from the list"></ng-selectize>
+                                            <!-- <div class="set" *ngIf="newItem.kitchenId">Kitchen is set to <span>{{newItem.kitchenName}}</span></div> -->
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <div class="form-group" [ngClass]="{ 'has-danger': itemForm.submitted && !itemName.valid }">
+                                            <label for="">Item Name</label>
+                                            <input type="text" class="form-control" placeholder="e.g. Burger" name="itemName" [(ngModel)]="newItem.itemName" #itemName="ngModel" [ngClass]="{ 'is-invalid': itemForm.submitted && !itemName.valid }" required>
+                                            <div *ngIf="itemForm.submitted && !itemName.valid" class="invalid-feedback">Item name is required</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <div class="form-group" [ngClass]="{ 'has-danger': itemForm.submitted && !price.valid }">
+                                            <label for="">Price</label>
+                                            <input type="number" class="form-control" placeholder="0" name="price" [(ngModel)]="newItem.price" #price="ngModel" [ngClass]="{ 'is-invalid': itemForm.submitted && !price.valid }" required>
+                                            <div *ngIf="itemForm.submitted && !price.valid" class="invalid-feedback">Price is required</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="">Description</label>
+                                            <input type="text" class="form-control" placeholder="Description about item" name="description" [(ngModel)]="newItem.description" #description="ngModel">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="">Image URL</label>
+                                            <input type="text" class="form-control" placeholder="http://image.png" name="imageUrl" [(ngModel)]="newItem.imageUrl" #imageUrl="ngModel">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <div class="form-group button-container">
+                                            <button type="submit" class="btn btn-success">Add Item to Kitchen</button>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12" *ngIf="errorMessage">
+                                        <div class="alert alert-danger">
+                                            {{ errorMessage }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="common-body">
+                    <div class="common-search-wrapper">
+                        <div class="search-input">
+                            <input type="text" name="" value="" placeholder="Search" onclick="this.placeholder = ''" onblur="this.placeholder = 'Search'" class="form-control" [(ngModel)]="searchTerm">
+                            <span class="icon-search"></span>
+                        </div>
+                    </div>
+                    <div class="common-content-body">
+                        <div class="padding">
+                            <table class="common-table">
+                                <tr class="table-header">
+                                    <th class="" width="120">Item Name</th>
+                                    <th class="" width="120">Kitchen</th>
+                                    <th class="" width="50">Price</th>
+                                    <th class="" width="200">Description</th>
+                                    <th class="" width="100">Image URL</th>
+                                    <th class="" width="80">Added On</th>
+                                    <th class="" width="100">Added By</th>
+                                    <th class="tp"></th>
+                                    <th class="tp"></th>
+                                </tr>
+                                <tr class="common-table-tr" *ngFor="let item of itemsList | filterItem : searchTerm">
+                                    <td class="normal-td">{{ item.itemName }}</td>
+                                    <td class="normal-td">{{ item.kitchenName }}</td>
+                                    <td class="normal-td">{{ item.price }}</td>
+                                    <td class="normal-td">{{ item.description }}</td>
+                                    <td class="normal-td">{{ item.imageUrl }}</td>
+                                    <td class="normal-td">{{ item.addedOn | date : 'short' }}</td>
+                                    <td class="normal-td">{{ item.addedBy }}</td>
+                                    <td class="button-td">
+                                        <button class="button-item" (click)="deleteItem(item)">
+                                            x
+                                        </button>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<ng2-toasty></ng2-toasty>

@@ -1,0 +1,470 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import '/scss/_variables.scss';
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+
+ul{
+	list-style: none;
+}
+
+html{
+	height: 100%;
+	width: 100%;
+	position: relative
+}
+
+body{
+	width: 100%;
+    position: relative;
+    height: 100%;
+}
+
+.inner-page-container{
+	padding-top: $top-nav-height;
+	position: relative;
+	background-color: #fff;
+	overflow: hidden;
+	height: auto;
+}
+
+.page-inner{
+	position: relative;
+	background-color: #fff;
+	overflow: hidden;
+	min-height: calc(100vh - #{$top-nav-height});
+}
+
+div.page-body{
+	width: 100%;
+	height: calc(100vh - #{$top-nav-height});
+	display: flex;
+	align-items: flex-start;
+	border-top: 1px solid $border-color;
+}
+
+.page-content{
+	background-color: #343644;
+	min-height: 100%;
+	display: block;
+}
+
+div.page-body{
+	width: 100%;
+	height: calc(100vh - #{$top-nav-height});
+	display: flex;
+	align-items: flex-start;
+	border-top: 1px solid $border-color;
+}
+
+input{
+	&:focus{
+		box-shadow: none !important;
+	}
+}
+
+div.muted{
+	font-size: 12px;
+	color: #777;
+
+	p{
+		margin-bottom: 0px;
+	}
+}
+
+div.h-form{
+	div.form-group{
+		label, input{
+			font-size: 12px;
+		}
+	}
+
+	div.button-container{
+		margin-top: 20px;
+		button{
+			font-size: 12px;
+		}
+	}
+
+	div.alert.alert-danger, div.set, .invalid-feedback{
+		font-size: 12px;
+	}
+
+	.selectize-input{
+		font-size: 12px;
+		border: 2px solid #DCE4EC !important;
+		padding: 5px 10px !important;
+		background-color: #fff !important;
+		background-image: none !important;
+		background-repeat: none !important;
+		box-shadow: none !important;
+		transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s !important;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+
+	   &.input-active{
+		   box-shadow: none;
+	   }
+
+	   input{
+		   height: auto !important;
+	   }
+   	}
+
+   	.selectize-dropdown{
+	   top: 32px !important;
+	   border: 2px solid #DCE4EC !important;
+	   box-shadow: none !important;
+	   background-color: none !important;
+   }
+}
+
+// Side dash common to the side
+div.common-dash{
+	width: $dash-expanded-width;
+	height: calc(100vh - #{$top-nav-height});
+	border-right: 1px solid $border-color;
+	background: #E8EBF0;
+	overflow-y: auto;
+
+	.dash-pad{
+		padding: 20px;
+		border-bottom: 1px solid $border-color;
+	}
+
+	.tab-title{
+		margin-bottom: 20px;
+
+		h2{
+			font-size: 16px;
+			font-weight: 500;
+
+			small{
+				color: rgba(#555, .75);
+			}
+		}
+
+		p{
+			font-size: 14px;
+			color: #666;
+		}
+	}
+}
+
+div.common-body{
+	width: calc(100% - #{$dash-expanded-width});
+	min-height: 100%;
+	max-height: 100%;
+	height: 100%;
+}
+
+div.common-search-wrapper{
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	height: 40px;
+	width: 100%;
+	border-bottom: 1px solid #eee;
+
+	.buttons-container{
+	  display: flex;
+	  align-items: center;
+	  justify-content: center;
+	  margin-right: 10px;
+
+	  button{
+		width: 120px;
+		height: 30px;
+		line-height: 25px;
+		padding: 0px;
+		margin-right: 10px;
+		background: none;
+		border: none;
+		transition: background-color 200ms ease-out;
+			outline: none !important;
+
+		&:hover{
+		  background-color: rgba(#007FFF, .6);
+		  color: #fff;
+		}
+
+		&.active{
+		  background-color: rgba(#007FFF, .8);
+		  color: #fff;
+		}
+
+		&:first-child{
+		  margin-left: 20px;
+		}
+
+		&:last-child{
+		  margin-right: 0px;
+		}
+	  }
+	}
+
+	.search-input {
+		position: relative;
+		width: 100%;
+		height: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+		input:focus + span.icon-search{
+			color: #2c3e50;
+		}
+
+		input {
+			height: 100%;
+			padding: 5px 10px 5px 15px;
+			position: relative;
+			font-size: 16px;
+			border: none;
+		}
+
+		span.icon-search {
+			position: absolute;
+			left: 15px;
+			top: 13px;
+			font-size: 14px;
+			color: #DCE4EC;
+			transition: color .15s ease-in;
+		}
+	}
+}
+
+div.common-content-body{
+	height: calc(100% - 40px);
+	width: 100%;
+	background-color: #FAFDFF;
+	overflow-x: auto;
+	overflow-y: auto;
+
+	.padding{
+		width: 100%;
+		float: left;
+		padding: 20px 20px 20px 20px;
+	}
+
+	.common-table {
+		border-collapse: collapse;
+		border-spacing: 0;
+		border-color: #ccc;
+		width: 100%;
+		table-layout: fixed;
+		overflow: visible;
+	}
+
+	.common-table th {
+		font-size: 14px;
+		font-weight: normal;
+		padding: 5px 10px;
+		border-style: solid;
+		border-width: 1px;
+		overflow: hidden;
+		word-break: normal;
+		border-color: #EDEDED;
+		color: #333;
+		background-color: #fff;
+		position: relative;
+
+		&.tp{
+			border: none;
+			background-color: transparent;
+			width: 30px;
+		}
+	}
+
+	.common-table-tr{
+		&:hover{
+			background-color: darken(#FAFDFF, 5%) !important;
+
+			.normal-td .td-with-btns .btns{
+				opacity: 1 !important;
+			}
+		}
+		&:nth-child(even){
+			background: #fff;
+		}
+		&:nth-child(odd){
+			background: rgba(#eee, 0.45);
+		}
+	}
+
+	.common-table td {
+
+		vertical-align: middle;
+		border-width: 1px;
+		overflow: hidden;
+
+		&.normal-td{
+			background-color: transparent;
+			font-size: 12px;
+			border: 1px solid #ededed;
+			color: #333;
+			padding: 5px 10px;
+			white-space: nowrap;
+    		overflow: hidden;
+    		text-overflow: ellipsis;
+
+			.td-with-btns{
+				width: 100%;
+				display: flex;
+				justify-content: space-between;
+
+				.btns{
+					transition: opacity 200ms linear;
+					opacity: 0;
+
+					button{
+						background-color: transparent;
+						font-size: 14px;
+						padding: 0 5px;
+						border: none;
+
+						span{
+							color: rgba(#000, .5);
+						}
+
+						&.disabled{
+							opacity: .2;
+							cursor: not-allowed;
+						}
+
+						&:hover{
+							span{
+								color: rgba(#000, .9);
+							}
+						}
+					}
+				}
+			}
+		}
+
+		&.button-td{
+			text-align: center;
+			background: #FAFDFF;
+
+			&:hover{
+				background-color: rgba(#000, .2);
+			}
+
+			.button-item{
+				background-color: transparent;
+				border: none;
+				font-size: 14px;
+			}
+		}
+
+	}
+}
+
+//switch
+/* The switch - the box around the slider */
+.switch {
+	position: relative;
+	display: inline-block;
+	width: 60px;
+	height: 34px;
+  }
+  
+  /* Hide default HTML checkbox */
+  .switch input {display:none;}
+  
+  /* The slider */
+  .slider {
+	position: absolute;
+	cursor: pointer;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: #dc3545;
+	-webkit-transition: .4s;
+	transition: .4s;
+  }
+  
+  .slider:before {
+	position: absolute;
+	content: "";
+	height: 26px;
+	width: 26px;
+	left: 4px;
+	bottom: 4px;
+	background-color: white;
+	-webkit-transition: .4s;
+	transition: .4s;
+  }
+  
+  input:checked + .slider {
+	background-color: #28a745;
+  }
+  
+  input:focus + .slider {
+	box-shadow: 0 0 1px #28a745;
+  }
+  
+  input:checked + .slider:before {
+	-webkit-transform: translateX(26px);
+	-ms-transform: translateX(26px);
+	transform: translateX(26px);
+  }
+  
+  /* Rounded sliders */
+  .slider.round {
+	border-radius: 34px;
+  }
+  
+  .slider.round:before {
+	border-radius: 50%;
+  }
+
+  // whatsapp number
+  .form-group.whatsapp-number{
+    position: relative;
+
+    span{
+        position: absolute;
+        top: 37px;
+        left: 8px;
+        font-size: 12px;
+    }
+
+    input{
+        padding: .375rem .75rem .375rem 34px;
+    }
+}
+  
+  // Quill
+  .ql-toolbar.ql-snow{
+    background: #f5f5f5 !important;
+  }
+  
+  .ql-editor{
+    background: #fff;
+  }

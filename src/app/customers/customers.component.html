@@ -1,0 +1,58 @@
+<main class="page-content">
+    <app-navigation></app-navigation>
+
+    <div class="inner-page-container">
+        <div class="page-inner">
+            <div class="page-body">
+                <!-- <div class="common-dash">
+                    <div class="dash-pad">
+                        <div class="tab-title">
+                            <h2>
+                              Sign up customers
+                            </h2>
+                        </div>
+
+                        <div class="h-form">
+
+                        </div>
+                    </div>
+                </div> -->
+
+                <div class="common-body">
+                    <div class="common-search-wrapper">
+                        <div class="search-input">
+                            <input type="text" name="" value="" placeholder="Search" onclick="this.placeholder = ''" onblur="this.placeholder = 'Search'" class="form-control" [(ngModel)]="searchTerm">
+                            <span class="icon-search"></span>
+                        </div>
+                    </div>
+                    <div class="common-content-body">
+                        <div class="padding">
+                            <table class="common-table">
+                                <tr class="table-header">
+                                    <th class="" width="200">Full Name</th>
+                                    <th class="" width="200">Contact Number (Whatsapp)</th>
+                                    <th class="" width="200">Email</th>
+                                    <th class="" width="200">Address</th>
+                                    <th class="" width="120">Added On</th>
+                                    <!-- <th class="tp"></th> -->
+                                    <!-- <th class="tp"></th> -->
+                                </tr>
+                                <tr class="common-table-tr" *ngFor="let customer of customersList | filterCustomer: searchTerm">
+                                    <td class="normal-td">{{ customer.fullName }}</td>
+                                    <td class="normal-td">{{ customer.contactNumber }}</td>
+                                    <td class="normal-td">{{ customer.email }}</td>
+                                    <td class="normal-td">{{ customer.address }}</td>
+                                    <td class="normal-td">{{ customer.addedOn | date: 'short'}}</td>
+                                    
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</main>
